@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import ACTIONS from '../modules/action'
 
 import {
   withStyles,
@@ -51,12 +53,14 @@ class ToDo extends Component {
     this.setState({ item: '' })
     if (this.state.item !== '') {
       // add task to store
+      this.props.createItem(this.state.item)
     }
     event.preventDefault()
   }
 
   handleDelete = event => {
     // delete task from store
+    this.props.deleteItem(event.target.value)
   }
 
   handleChange = event => {
@@ -100,4 +104,16 @@ class ToDo extends Component {
   }
 }
 
-export default withStyles(styles)(ToDo)
+const mapStateToProps = state => ({
+  items: state.items,
+})
+
+const mapDispatchToProps = dispatch => ({
+  createItem: item => dispatch(ACTIONS.createItem(item)),
+  deleteItem: id => dispatch(ACTIONS.deleteItem(id)),
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withStyles(styles)(ToDo))
