@@ -22,10 +22,11 @@ const styles = theme => ({
     maxWidth: 752,
   },
   demo: {
-    backgroundColor: theme.palatte.background.paper,
+    backgroundColor: theme.palette.background.paper,
   },
   title: {
     margin: `${theme.spacing.unit * 4}px 0 ${theme.spacing.unit * 2}px`,
+    color: 'black'
   },
 })
 
